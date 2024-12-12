@@ -1,9 +1,10 @@
 "use client";
 
 import { useAppDispatch } from "@/lib/store";
-import { addToCart } from "@/lib/store/cartSlice";
+import { addToCart, selectCartItems } from "@/lib/store/cartSlice";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/lib/api/faker-shop";
+import { useAppSelector } from "@/lib/store";
 
 interface AddToCartButtonProps {
   product: Product;
@@ -11,8 +12,8 @@ interface AddToCartButtonProps {
 
 export default function AddToCartButton({ product }: AddToCartButtonProps) {
   const dispatch = useAppDispatch();
-
   const handleAddToCart = () => {
+    console.log("Adding to cart:", product);
     dispatch(addToCart(product));
   };
 
