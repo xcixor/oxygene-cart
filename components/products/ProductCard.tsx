@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/card";
 import { Loader2, ShoppingCart, Plus, Minus } from "lucide-react";
 import { useState } from "react";
+import ImageComponent from "./ImageComponent";
 
 interface ProductCardProps {
   product: Product;
@@ -51,15 +52,8 @@ export function ProductCard({ product }: ProductCardProps) {
     <Card className="flex h-full flex-col rounded-none border-0 border-b bg-inherit shadow-none">
       <CardHeader className="bg-inherit p-4">
         <Link href={`/products/${product.id}`}>
-          <div className="relative aspect-square overflow-hidden rounded-lg">
-            <Image
-              src={product.image}
-              alt={product.title}
-              fill
-              className="object-cover transition-transform hover:scale-105"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority
-            />
+          <div className="overflow-hidden rounded-lg bg-white p-2">
+            <ImageComponent product={product} />
             {quantity > 0 && (
               <div className="absolute right-2 top-2 flex items-center justify-center rounded-full bg-primary px-2 py-1 text-xs text-primary-foreground">
                 {quantity}
