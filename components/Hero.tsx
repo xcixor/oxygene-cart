@@ -45,7 +45,7 @@ const Hero = ({ title, description }: Props) => {
       {description && (
         <motion.p
           variants={itemVariants}
-          className="xl:text-[1.2rem] leading-6 text-white"
+          className="xl:text-[1.1rem] leading-6 text-white line-clamp-2"
         >
           {description}
         </motion.p>
