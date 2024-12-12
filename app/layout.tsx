@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
 import { ReduxProvider } from "./providers";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,12 +26,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const classes = clsx(geistSans.variable, geistMono.variable, "antialiased");
+  const classes = clsx(
+    geistSans.variable,
+    geistMono.variable,
+    "antialiased min-h-screen flex flex-col",
+  );
 
   return (
     <html lang="en">
       <ReduxProvider>
-        <body className={classes}>{children}</body>
+        <body className={classes}>
+          <div className="flex-1">{children}</div>
+          <div className="flex-shrink-0">
+            <Footer />
+          </div>
+        </body>
       </ReduxProvider>
     </html>
   );

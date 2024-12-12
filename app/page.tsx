@@ -1,9 +1,22 @@
-export default function Home() {
+import { Suspense } from "react";
+import { getAllProducts } from "@/lib/api/faker-shop";
+import { ProductGrid } from "@/components/products/ProductGrid";
+import { Loader } from "@/components/ui/Loader";
+
+export const metadata = {
+  title: "Products | FakerShop",
+  description: "Browse our collection of products",
+};
+
+export default async function ProductsPage() {
+  const products = await getAllProducts();
+
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-      <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
-        <p>Shop</p>
-      </main>
-    </div>
+    <main className="container mx-auto px-4 py-8">
+      <h1 className="mb-8 text-3xl font-bold">Our Products</h1>
+      <Suspense fallback={<Loader />}>
+        <ProductGrid products={products} />
+      </Suspense>
+    </main>
   );
 }
