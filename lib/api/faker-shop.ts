@@ -1,6 +1,6 @@
 // faker shop
 
-import { env } from "./env";
+import { env } from "@/lib/env";
 
 export interface Product {
   id: number;

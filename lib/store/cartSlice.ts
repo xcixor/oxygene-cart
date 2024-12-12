@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Product } from "../faker-shop";
+import { Product } from "@/lib/api/faker-shop";
 
 // Types
 export interface CartItem {
