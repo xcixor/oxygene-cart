@@ -7,14 +7,20 @@ import { CartSummary } from "@/components/cart/CartSummary";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
+import HeroComponent from "@/components/HeroComponent";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 export default function CartPage() {
   const cartItems = useAppSelector(selectCartItems);
 
   if (cartItems.length === 0) {
     return (
-      <div className="container mx-auto px-4 py-16">
-        <div className="space-y-4 text-center">
+      <main className="flex w-full flex-1 flex-col">
+        <HeroComponent
+          title="Your Cart"
+          description="Review your items and checkout"
+        />
+        <MaxWidthWrapper className="flex flex-1 flex-col items-center justify-center space-y-4 text-center">
           <ShoppingBag className="mx-auto h-12 w-12 text-muted-foreground" />
           <h2 className="text-2xl font-semibold">Your cart is empty</h2>
           <p className="text-muted-foreground">
@@ -23,16 +29,19 @@ export default function CartPage() {
           <Button asChild className="mt-4">
             <Link href="/">Continue Shopping</Link>
           </Button>
-        </div>
-      </div>
+        </MaxWidthWrapper>
+      </main>
     );
   }
 
   return (
-    <main className="container mx-auto px-4 py-8">
-      <h1 className="mb-8 text-3xl font-bold">Shopping Cart</h1>
+    <main className="flex w-full flex-1 flex-col">
+      <HeroComponent
+        title="Your Cart"
+        description="Review your items and checkout"
+      />
 
-      <div className="grid gap-8 lg:grid-cols-3">
+      <MaxWidthWrapper className="grid gap-8 lg:grid-cols-3">
         {/* Cart Items */}
         <div className="lg:col-span-2">
           <div className="space-y-4">
@@ -49,10 +58,10 @@ export default function CartPage() {
         </div>
 
         {/* Cart Summary */}
-        <div className="lg:col-span-1">
+        <div className="lg:col-span-1 py-4">
           <CartSummary />
         </div>
-      </div>
+      </MaxWidthWrapper>
     </main>
   );
 }
