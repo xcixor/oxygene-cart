@@ -43,7 +43,7 @@ export default function CartPage() {
 
           <div className="mt-8">
             <Button asChild variant="outline">
-              <Link href="/products">Continue Shopping</Link>
+              <Link href="/">Continue Shopping</Link>
             </Button>
           </div>
         </div>
@@ -56,8 +56,3 @@ export default function CartPage() {
     </main>
   );
 }
-
-export const metadata = {
-  title: "Shopping Cart | FakerShop",
-  description: "View and manage your shopping cart",
-};

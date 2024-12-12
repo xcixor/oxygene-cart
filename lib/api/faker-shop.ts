@@ -39,8 +39,9 @@ export async function getProduct(id: number): Promise<Product> {
   try {
     const response = await fetch(`${API_BASE_URL}/products/${id}`);
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch product");
+    if (!response.ok || response.status === 200) {
+      console.warn("Failed to fetch product");
+      return {} as Product;
     }
 
     const data: Product = await response.json();
