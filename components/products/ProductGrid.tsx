@@ -10,16 +10,18 @@ interface ProductGridProps {
   products: Product[];
   isLoading?: boolean;
   basePageUrl: string;
+  itemsPerPage?: number;
 }
 
 export function ProductGrid({
   products,
   isLoading = false,
   basePageUrl,
+  itemsPerPage = 4,
 }: ProductGridProps) {
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
-  const ITEMS_PER_PAGE = 4;
+  const ITEMS_PER_PAGE = itemsPerPage;
 
   if (isLoading) {
     return <Loader />;
