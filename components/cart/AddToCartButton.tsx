@@ -41,7 +41,7 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
 
   if (quantity > 0) {
     return (
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center gap-4">
         <div className="flex items-center gap-2 rounded-md border">
           <Button
             size="icon"

@@ -12,7 +12,7 @@ type Props = {
 
 const HeroComponent = ({ title, description }: Props) => {
   return (
-    <section className="bg-secondary-600 flex h-[300px] flex-col bg-[url('/hero.webp')] bg-cover bg-center bg-no-repeat">
+    <section className="bg-secondary-600 flex md:h-[300px] flex-col bg-[url('/hero.webp')] bg-cover bg-center bg-no-repeat">
       <div className="flex flex-1 bg-[rgba(64,64,64,0.3)]">
         <MaxWidthWrapper className="flex flex-col justify-center gap-4">
           <Logo />
