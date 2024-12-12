@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
+import { ReduxProvider } from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +29,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={classes}>{children}</body>
+      <ReduxProvider>
+        <body className={classes}>{children}</body>
+      </ReduxProvider>
     </html>
   );
 }
