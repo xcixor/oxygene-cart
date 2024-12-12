@@ -25,7 +25,7 @@ export default async function ProductsPage() {
       />
       <MaxWidthWrapper className="py-12 md:flex">
         <div className="basis-2/3">
-          <ProductGrid products={products} />
+          <ProductGrid products={products} basePageUrl="/" />
         </div>
         <div className="basis-1/3">
           <CategoryNav categories={categories} />
