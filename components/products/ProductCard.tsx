@@ -68,22 +68,19 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         </Link>
       </CardHeader>
-      <CardContent className="flex-grow p-4">
+      <CardContent className="flex-grow px-4 py-2">
         <Link href={`/products/${product.id}`}>
-          <h3 className="line-clamp-2 text-lg font-semibold hover:text-primary">
+          <h3 className="line-clamp-2 text-[0.9rem] font-semibold hover:text-primary">
             {product.title}
           </h3>
         </Link>
-        <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-          {product.description}
-        </p>
       </CardContent>
-      <CardFooter className="justify-between p-4">
-        <div className="mt-2 flex items-center gap-2">
-          <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
+      <CardFooter className="items-start justify-between px-4 py-2">
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-md font-bold">${product.price.toFixed(2)}</span>
           <div className="flex items-center gap-1">
             <span className="text-sm text-yellow-500">★</span>
-            <span className="text-sm text-muted-foreground">
+            <span className="text-[0.7rem] text-muted-foreground">
               {product.rating.rate} ({product.rating.count})
             </span>
           </div>
