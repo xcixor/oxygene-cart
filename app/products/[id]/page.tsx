@@ -11,9 +11,9 @@ import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 // Generate metadata for the page

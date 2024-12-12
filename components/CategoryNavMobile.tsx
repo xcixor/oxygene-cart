@@ -35,7 +35,9 @@ export function CategoryNavMobile({ categories }: CategoryNavMobileProps) {
         : `/categories?category=${encodeURIComponent(value)}`;
     router.push(url);
     // Close the sheet menu
-    const sheetTrigger = document.querySelector("[aria-expanded='true']");
+    const sheetTrigger = document.querySelector(
+      "[aria-expanded='true']",
+    ) as HTMLElement;
     if (sheetTrigger) {
       sheetTrigger.click();
     }
