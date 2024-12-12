@@ -27,7 +27,7 @@ export default async function ProductsPage() {
         <div className="basis-2/3">
           <ProductGrid products={products} basePageUrl="/" itemsPerPage={8} />
         </div>
-        <div className="basis-1/3">
+        <div className="basis-1/3 max-md:hidden">
           <CategoryNav categories={categories} />
         </div>
       </MaxWidthWrapper>

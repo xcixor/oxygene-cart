@@ -73,6 +73,8 @@ const Footer = () => {
                 <a
                   href="https://www.linkedin.com/in/engpeterndungu/"
                   className="text-muted-foreground hover:text-primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <FaLinkedin className="h-6 w-6" />
                 </a>
