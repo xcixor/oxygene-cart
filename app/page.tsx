@@ -1,7 +1,5 @@
-import { Suspense } from "react";
 import { getAllProducts, getAllCategories } from "@/lib/api/faker-shop";
 import { ProductGrid } from "@/components/products/ProductGrid";
-import { Loader } from "@/components/ui/Loader";
 import HeroComponent from "@/components/HeroComponent";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { CategoryNav } from "@/components/CategoryNav";

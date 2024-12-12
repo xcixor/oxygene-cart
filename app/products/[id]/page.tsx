@@ -1,5 +1,3 @@
-// app/products/[id]/page.tsx
-
 import { Suspense } from "react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -10,7 +8,6 @@ import AddToCartButton from "@/components/cart/AddToCartButton";
 import HeroComponent from "@/components/HeroComponent";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 
 interface ProductPageProps {
