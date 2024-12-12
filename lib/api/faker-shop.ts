@@ -35,16 +35,23 @@ export async function getAllProducts(): Promise<Product[]> {
 }
 
 // Get a single product by ID
-export async function getProduct(id: number): Promise<Product | null> {
+export async function getProduct(id: number): Promise<Product> {
   try {
     const response = await fetch(`${API_BASE_URL}/products/${id}`);
 
-    if (!response.ok || response.status === 200) {
-      console.warn("Failed to fetch product");
-      return null;
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error("Product not found");
+      }
+      throw new Error(`Failed to fetch product: ${response.statusText}`);
     }
 
-    const data: Product = await response.json();
+    const data = await response.json();
+
+    if (!data || !data.id) {
+      throw new Error("Invalid product data received");
+    }
+
     return data;
   } catch (error) {
     console.error(`Error fetching product ${id}:`, error);

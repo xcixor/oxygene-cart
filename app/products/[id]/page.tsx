@@ -1,3 +1,5 @@
+// app/products/[id]/page.tsx
+
 import { Suspense } from "react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -14,27 +16,45 @@ interface ProductPageProps {
 
 // Generate metadata for the page
 export async function generateMetadata({ params }: ProductPageProps) {
-  const { id } = await params;
-  const product = await getProduct(parseInt(id));
+  try {
+    const { id } = await params;
+    const product = await getProduct(parseInt(id));
 
-  return {
-    title: `${product.title} | FakerShop`,
-    description: product.description,
-  };
+    return {
+      title: `${product.title} | FakerShop`,
+      description: product.description,
+    };
+  } catch (error) {
+    return {
+      title: "Product Not Found | FakerShop",
+      description: "The requested product could not be found.",
+    };
+  }
 }
 
 // Generate static params for all products
 export async function generateStaticParams() {
-  const products = await getAllProducts();
-
-  return products.map((product) => ({
-    id: product.id.toString(),
-  }));
+  try {
+    const products = await getAllProducts();
+    return products.map((product) => ({
+      id: product.id.toString(),
+    }));
+  } catch (error) {
+    console.error("Error generating static params:", error);
+    return [];
+  }
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = await params;
-  const product = await getProduct(parseInt(id));
+  let product;
+
+  try {
+    const { id } = await params;
+    product = await getProduct(parseInt(id));
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    notFound();
+  }
 
   if (!product) {
     notFound();
@@ -60,7 +80,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <div>
             <h1 className="mb-2 text-3xl font-bold">{product.title}</h1>
             <p className="text-xl font-semibold text-primary">
-              ${product.price?.toFixed(2)}
+              ${product.price.toFixed(2)}
             </p>
           </div>
 
@@ -70,7 +90,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <span
                   key={i}
                   className={`text-lg ${
-                    i < Math.floor(product.rating?.rate)
+                    i < Math.floor(product.rating.rate)
                       ? "text-yellow-500"
                       : "text-gray-300"
                   }`}
@@ -80,7 +100,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               ))}
             </div>
             <span className="text-sm text-muted-foreground">
-              ({product.rating?.count} reviews)
+              ({product.rating.count} reviews)
             </span>
           </div>
 
