@@ -2,8 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useAppDispatch } from "@/lib/store";
-import { addToCart } from "@/lib/store/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/store";
+import {
+  addToCart,
+  updateQuantity,
+  selectCartItems,
+} from "@/lib/store/cartSlice";
 import { Product } from "@/lib/api/faker-shop";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,7 +16,8 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { ShoppingCart } from "lucide-react";
+import { Loader2, ShoppingCart, Plus, Minus } from "lucide-react";
+import { useState } from "react";
 
 interface ProductCardProps {
   product: Product;
@@ -20,9 +25,26 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const dispatch = useAppDispatch();
+  const cartItems = useAppSelector(selectCartItems);
+  const [loading, setLoading] = useState(false);
+
+  // Find if product is in cart and get its quantity
+  const cartItem = cartItems.find((item) => item.product.id === product.id);
+  const quantity = cartItem?.quantity || 0;
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product));
+    setLoading(true);
+    try {
+      dispatch(addToCart(product));
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdateQuantity = (newQuantity: number) => {
+    dispatch(updateQuantity({ productId: product.id, quantity: newQuantity }));
   };
 
   return (
@@ -38,6 +60,11 @@ export function ProductCard({ product }: ProductCardProps) {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority
             />
+            {quantity > 0 && (
+              <div className="absolute right-2 top-2 flex items-center justify-center rounded-full bg-primary px-2 py-1 text-xs text-primary-foreground">
+                {quantity}
+              </div>
+            )}
           </div>
         </Link>
       </CardHeader>
@@ -51,7 +78,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.description}
         </p>
       </CardContent>
-      <CardFooter className="p-4 justify-between">
+      <CardFooter className="justify-between p-4">
         <div className="mt-2 flex items-center gap-2">
           <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
           <div className="flex items-center gap-1">
@@ -61,9 +88,40 @@ export function ProductCard({ product }: ProductCardProps) {
             </span>
           </div>
         </div>
-        <Button onClick={handleAddToCart} className="w-auto" variant="ghost">
-          <ShoppingCart className="mr-2 h-4 w-4" />
-        </Button>
+        {quantity > 0 ? (
+          <div className="flex items-center gap-2">
+            <Button
+              size="icon"
+              variant="outline"
+              onClick={() => handleUpdateQuantity(quantity - 1)}
+              className="h-8 w-8"
+            >
+              <Minus className="h-4 w-4" />
+            </Button>
+            <span className="w-8 text-center">{quantity}</span>
+            <Button
+              size="icon"
+              variant="outline"
+              onClick={() => handleUpdateQuantity(quantity + 1)}
+              className="h-8 w-8"
+            >
+              <Plus className="h-4 w-4" />
+            </Button>
+          </div>
+        ) : (
+          <Button
+            onClick={handleAddToCart}
+            className="w-auto"
+            variant="ghost"
+            disabled={loading}
+          >
+            {loading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <ShoppingCart className="h-4 w-4" />
+            )}
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );
