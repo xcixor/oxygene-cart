@@ -73,7 +73,7 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
   return (
     <Button
       size="lg"
-      className="w-full"
+      className="w-auto"
       onClick={handleAddToCart}
       disabled={loading}
     >
