@@ -14,7 +14,7 @@ export default async function ProductsPage() {
   const products = await getAllProducts();
 
   return (
-    <main className="w-full bg-red-200">
+    <main className="w-full">
       <HeroComponent
         title="Products"
         description="Browse our collection of products"
