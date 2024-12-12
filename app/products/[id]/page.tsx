@@ -14,7 +14,8 @@ interface ProductPageProps {
 
 // Generate metadata for the page
 export async function generateMetadata({ params }: ProductPageProps) {
-  const product = await getProduct(parseInt(params.id));
+  const { id } = await params;
+  const product = await getProduct(parseInt(id));
 
   return {
     title: `${product.title} | FakerShop`,
@@ -32,7 +33,8 @@ export async function generateStaticParams() {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const product = await getProduct(parseInt(params.id));
+  const { id } = await params;
+  const product = await getProduct(parseInt(id));
 
   if (!product) {
     notFound();
@@ -58,7 +60,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <div>
             <h1 className="mb-2 text-3xl font-bold">{product.title}</h1>
             <p className="text-xl font-semibold text-primary">
-              ${product.price.toFixed(2)}
+              ${product.price?.toFixed(2)}
             </p>
           </div>
 
@@ -68,7 +70,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <span
                   key={i}
                   className={`text-lg ${
-                    i < Math.floor(product.rating.rate)
+                    i < Math.floor(product.rating?.rate)
                       ? "text-yellow-500"
                       : "text-gray-300"
                   }`}
@@ -78,7 +80,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               ))}
             </div>
             <span className="text-sm text-muted-foreground">
-              ({product.rating.count} reviews)
+              ({product.rating?.count} reviews)
             </span>
           </div>
 
