@@ -1,9 +1,9 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import { Provider as ReduxProvider } from "react-redux";
+import { Provider } from "react-redux";
 import { store } from "@/lib/store";
 
-export function Providers({ children }: PropsWithChildren) {
-  return <ReduxProvider store={store}>{children}</ReduxProvider>;
+export function ReduxProvider({ children }: PropsWithChildren) {
+  return <Provider store={store}>{children}</Provider>;
 }
