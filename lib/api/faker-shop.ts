@@ -35,13 +35,13 @@ export async function getAllProducts(): Promise<Product[]> {
 }
 
 // Get a single product by ID
-export async function getProduct(id: number): Promise<Product> {
+export async function getProduct(id: number): Promise<Product | null> {
   try {
     const response = await fetch(`${API_BASE_URL}/products/${id}`);
 
     if (!response.ok || response.status === 200) {
       console.warn("Failed to fetch product");
-      return {} as Product;
+      return null;
     }
 
     const data: Product = await response.json();

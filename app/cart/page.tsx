@@ -21,7 +21,7 @@ export default function CartPage() {
             Looks like you haven&rsquo;t added anything to your cart yet.
           </p>
           <Button asChild className="mt-4">
-            <Link href="/products">Continue Shopping</Link>
+            <Link href="/">Continue Shopping</Link>
           </Button>
         </div>
       </div>
