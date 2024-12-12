@@ -7,6 +7,11 @@ import { getProduct, getAllProducts } from "@/lib/api/faker-shop";
 import { Loader } from "@/components/ui/Loader";
 import { Card } from "@/components/ui/card";
 import AddToCartButton from "@/components/cart/AddToCartButton";
+import HeroComponent from "@/components/HeroComponent";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ShoppingCart } from "lucide-react";
 
 interface ProductPageProps {
   params: {
@@ -25,6 +30,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
       description: product.description,
     };
   } catch (error) {
+    console.error("Error generating metadata:", error);
     return {
       title: "Product Not Found | FakerShop",
       description: "The requested product could not be found.",
@@ -61,9 +67,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
   }
 
   return (
-    <main className="container mx-auto px-4 py-8">
-      <div className="grid gap-8 md:grid-cols-2">
-        {/* Product Image */}
+    <main className="flex w-full flex-1 flex-col">
+      <HeroComponent title={product.title} description={product.description} />
+      <MaxWidthWrapper className="grid flex-1 items-center gap-8 max-md:p-4 md:grid-cols-2">
         <div className="relative aspect-square">
           <Image
             src={product.image}
@@ -75,11 +81,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
           />
         </div>
 
-        {/* Product Details */}
         <div className="space-y-6">
           <div>
             <h1 className="mb-2 text-3xl font-bold">{product.title}</h1>
-            <p className="text-xl font-semibold text-primary">
+            <p className="text-xl font-semibold text-orange-500">
               ${product.price.toFixed(2)}
             </p>
           </div>
@@ -104,7 +109,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </span>
           </div>
 
-          <Card className="p-4">
+          <Card className="border-0 shadow-none">
             <h2 className="mb-2 text-lg font-semibold">Description</h2>
             <p className="text-muted-foreground">{product.description}</p>
           </Card>
@@ -114,8 +119,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <AddToCartButton product={product} />
             </Suspense>
           </div>
+          <div className="">
+            <Link
+              href="/cart"
+              className="flex items-center gap-2 text-orange-500"
+            >
+              View Cart <ShoppingCart className="ml-2 h-4 w-4" />
+            </Link>
+          </div>
         </div>
-      </div>
+      </MaxWidthWrapper>
     </main>
   );
 }

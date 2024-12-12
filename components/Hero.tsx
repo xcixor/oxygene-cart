@@ -38,14 +38,14 @@ const Hero = ({ title, description }: Props) => {
     >
       <motion.h1
         variants={itemVariants}
-        className="py-4 font-bold text-white md:text-4xl"
+        className="py-4 font-bold text-white md:text-4xl text-xl"
       >
         {title}
       </motion.h1>
       {description && (
         <motion.p
           variants={itemVariants}
-          className="text-[1.2rem] leading-6 text-white"
+          className="xl:text-[1.2rem] leading-6 text-white"
         >
           {description}
         </motion.p>

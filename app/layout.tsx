@@ -37,7 +37,7 @@ export default function RootLayout({
     <html lang="en">
       <ReduxProvider>
         <body className={classes}>
-          <div className="flex-1">{children}</div>
+          <div className="flex flex-1 flex-col">{children}</div>
           <div className="flex-shrink-0">
             <Footer />
           </div>
