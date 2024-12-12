@@ -58,7 +58,7 @@ export default function CartPage() {
         </div>
 
         {/* Cart Summary */}
-        <div className="lg:col-span-1 py-4">
+        <div className="py-4 lg:col-span-1">
           <CartSummary />
         </div>
       </MaxWidthWrapper>

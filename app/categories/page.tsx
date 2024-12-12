@@ -57,7 +57,7 @@ export default async function CategoryPage({
         <div className="basis-2/3">
           <ProductGrid products={products} basePageUrl="/categories" />
         </div>
-        <div className="basis-1/3">
+        <div className="basis-1/3 max-md:hidden">
           <CategoryNav categories={categories} />
         </div>
       </MaxWidthWrapper>
