@@ -1,7 +1,5 @@
 // faker shop
 
-import { env } from "@/lib/env";
-
 export interface Product {
   id: number;
   title: string;
@@ -15,7 +13,7 @@ export interface Product {
   };
 }
 
-const API_BASE_URL = env.API_BASE_URL;
+const API_BASE_URL = "https://fakestoreapi.com";
 
 // Get all products from the API
 export async function getAllProducts(): Promise<Product[]> {
