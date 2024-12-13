@@ -1,6 +1,4 @@
-import { CartSummary } from "@/components/cart/CartSummary";
 import HeroComponent from "@/components/HeroComponent";
-import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import CartWrapper from "./CartWrapper";
 
 export default function CartPage() {
